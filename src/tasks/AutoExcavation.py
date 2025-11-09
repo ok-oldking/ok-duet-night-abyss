@@ -3,7 +3,7 @@ import time
 import cv2
 import re
 
-from ok import Logger, TaskDisabledException, Box, find_color_rectangles
+from ok import Logger, TaskDisabledException, Box, find_color_rectangles, color_range_to_bound
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
 from src.tasks.CommissionsTask import CommissionsTask, QuickMoveTask, Mission
 
@@ -43,6 +43,7 @@ class AutoExcavation(DNAOneTimeTask, CommissionsTask):
         self.init_param()
         self.load_char()
         _skill_time = 0
+        _excavator_count = 0
         while True:
             if self.in_team():
                 self.progressing = self.find_target_health_bar()
@@ -51,25 +52,32 @@ class AutoExcavation(DNAOneTimeTask, CommissionsTask):
                     _skill_time = self.use_skill(_skill_time)
                 else:
                     if _skill_time > 0:
-                        self.soundBeep(1)
+                        _excavator_count += 1
                         _skill_time = 0
-                        self.sleep(1)
+                        if _excavator_count < 3:
+                            self.soundBeep(1)
                     self.quick_move_task.run()
 
             _status = self.handle_mission_interface(stop_func=self.stop_func)
             if _status == Mission.START:
                 self.wait_until(self.in_team, time_out=30)
-                self.log_info_notify("任务完成")
+                self.log_info_notify("任务开始")
                 self.soundBeep()
                 self.init_param()
+                _excavator_count = 0
+                _skill_time = 0
             elif _status == Mission.STOP:
                 self.quit_mission()
                 self.init_param()
                 self.log_info("任务中止")
             elif _status == Mission.CONTINUE:
                 self.wait_until(self.in_team, time_out=30)
+                self.sleep(2)
                 self.log_info("任务继续")
-                self.soundBeep()
+                _excavator_count = 0
+                _skill_time = 0
+                if not self.find_target_health_bar():
+                    self.soundBeep(1)
 
             self.sleep(0.2)
 
@@ -91,9 +99,30 @@ class AutoExcavation(DNAOneTimeTask, CommissionsTask):
         self.draw_boxes(boxes=health_bar)
         return health_bar
 
+    def find_track_point(self, threshold: float = 0, box: Box | None = None, template=None) -> Box | None:
+        if box is None:
+            box = self.box_of_screen_scaled(2560, 1440, 454, 265, 2110, 1094, name="find_track_point", hcenter=True)
+        if template is None:
+            template = filter_track_point_color(self.get_feature_by_name("track_point").mat)
+        return self.find_one("track_point", threshold=threshold, box=box, template=template)
+
+
+def filter_track_point_color(img):
+    lower_bound, upper_bound = color_range_to_bound(track_point_color)
+    mask = cv2.inRange(img, lower_bound, upper_bound)
+    img_modified = img.copy()
+    img_modified[mask == 0] = 0
+    return img_modified
+
 
 green_health_bar_color = {
     "r": (135, 150),  # Red range
     "g": (200, 215),  # Green range
     "b": (150, 165),  # Blue range
+}
+
+track_point_color = {
+    "r": (121, 255),  # Red range
+    "g": (116, 255),  # Green range
+    "b": (34, 211),  # Blue range
 }
