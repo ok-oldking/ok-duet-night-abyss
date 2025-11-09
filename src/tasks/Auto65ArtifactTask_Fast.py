@@ -1,7 +1,6 @@
 from qfluentwidgets import FluentIcon
 import time
 import win32con
-import win32gui
 
 from ok import Logger, TaskDisabledException
 from src.tasks.DNAOneTimeTask import DNAOneTimeTask
@@ -110,7 +109,7 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
                 # 检查是否达到目标次数
                 if _count >= self.config.get("刷几次", 999):
                     self.log_info(f"已完成全部 {_count} 次任务")
-                    self.soundBeep(3)
+                    self.soundBeep()
                     return
 
                 # 等待重新进入队伍
@@ -180,9 +179,7 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
             # 1.11s: 开始冲刺 (0.59s后)
             self.sleep(0.59)
-            win32gui.SendMessage(
-                self.hwnd.hwnd, win32con.WM_KEYDOWN, 0xA0, 0
-            )  # 左Shift键
+            self.send_vk_down(win32con.VK_LSHIFT)
 
             # 1.33s: 向左移动 (0.22s后)
             self.sleep(0.22)
@@ -206,17 +203,13 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
             # 5.22s-7.82s: Shift连续切换 (可能在调整位置)
             self.sleep(0.38)
-            win32gui.SendMessage(self.hwnd.hwnd, win32con.WM_KEYUP, 0xA0, 0)
+            self.send_vk_up(win32con.VK_LSHIFT)
             self.sleep(0.24)
-            win32gui.SendMessage(self.hwnd.hwnd, win32con.WM_KEYDOWN, 0xA0, 0)
-            self.sleep(0.35)
-            win32gui.SendMessage(self.hwnd.hwnd, win32con.WM_KEYUP, 0xA0, 0)
+            self.send_vk(win32con.VK_LSHIFT, 0.35)
             self.sleep(0.79)
-            win32gui.SendMessage(self.hwnd.hwnd, win32con.WM_KEYDOWN, 0xA0, 0)
-            self.sleep(0.41)
-            win32gui.SendMessage(self.hwnd.hwnd, win32con.WM_KEYUP, 0xA0, 0)
+            self.send_vk(win32con.VK_LSHIFT, 0.41)
             self.sleep(0.80)
-            win32gui.SendMessage(self.hwnd.hwnd, win32con.WM_KEYDOWN, 0xA0, 0)
+            self.send_vk_down(win32con.VK_LSHIFT)
 
             # 9.09s: 停止前进 (1.27s后)
             self.sleep(1.27)
@@ -248,9 +241,7 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
 
             # 18.89s-18.99s: 释放所有移动键 (4.93s后)
             self.sleep(4.93)
-            win32gui.SendMessage(
-                self.hwnd.hwnd, win32con.WM_KEYUP, 0xA0, 0
-            )  # 释放左Shift
+            self.send_vk_up(win32con.VK_LSHIFT)
             self.sleep(0.10)
             self.send_key_up("a")
 
@@ -271,6 +262,4 @@ class Auto65ArtifactTask_Fast(DNAOneTimeTask, CommissionsTask, BaseCombatTask):
             self.send_key_up("a")
             self.send_key_up("s")
             self.send_key_up("d")
-            win32gui.SendMessage(
-                self.hwnd.hwnd, win32con.WM_KEYUP, 0xA0, 0
-            )  # 确保释放左Shift
+            self.send_vk_up(win32con.VK_LSHIFT)
