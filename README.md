@@ -7,7 +7,6 @@
   <img alt="GitHub Release" src="https://img.shields.io/github/v/release/BnanZ0/ok-duet-night-abyss">
   <a href="https://discord.gg/vVyCatEBgA"><img alt="Discord" src="https://img.shields.io/discord/296598043787132928?color=5865f2&label=%20Discord"></a>
 </div>
-
 ### 一个基于图像识别的二重螺旋自动化程序，支持后台运行，基于 [ok-script](https://github.com/ok-oldking/ok-script)开发。
 
 ## 免责声明
@@ -31,19 +30,13 @@ This software is open source, free of charge and for learning and exchange purpo
   * 自动穿引共鸣
 * 后台运行
 
----
-
 ## 兼容性
 * 支持 1600x900 以上的 16:9 分辨率
 * 简体中文/English
 
----
-
 ### 下载安装包运行
 * 从[https://github.com/BnanZ0/ok-duet-night-abyss/releases](https://github.com/BnanZ0/ok-duet-night-abyss/releases) 下载 ok-dna-win32-China-setup.exe
 * 可自动更新
-
----
 
 ### Python 源码运行
 
@@ -55,9 +48,7 @@ python main.py # run the release version 运行发行版
 python main_debug.py # run the debug version 运行调试版
 ```
 
----
-
-### **程序使用指南与常见问题解答 (FAQ)**
+## **程序使用指南与常见问题解答 (FAQ)**
 
 为了确保程序稳定运行，请您在使用前仔细阅读以下配置要求和问题解决方案。
 
@@ -127,17 +118,13 @@ python main_debug.py # run the debug version 运行调试版
     - 问题的具体表现是什么？
     - 问题是稳定复现还是偶尔发生？
 
----
-
-### 社区
+## 社区
 * 用户群 1063846003
 * 开发者群 259268560
 * [QQ频道](https://pd.qq.com/s/djmm6l44y)
 * [Discord](https://discord.gg/vVyCatEBgA)
 
----
-
-### 相关项目
+## 相关项目
 
 * [ok-duet-night-abyss](https://github.com/BnanZ0/ok-duet-night-abyss) 一个基于图像识别的二重螺旋自动化程序。
 * [ok-sra](https://github.com/Shasnow/ok-starrailassistant) 基于ok-script开发的星铁自动化
