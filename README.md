@@ -23,6 +23,7 @@ This software is open source, free of charge and for learning and exchange purpo
     "一经核实，运营团队将根据情节严重程度和次数，采取扣除违规收益、冻结或永久封禁游戏账号等措施，以维护玩家的公平权益。"
 
 ## 有什么功能？
+<img width="1590" height="1150" alt="QQ_1762958578056" src="https://github.com/user-attachments/assets/cb7f145b-b304-4a0e-891a-3b6d5acff65d" />
 
 * 副本挂机
   * 全自动或半自动
