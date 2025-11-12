@@ -7,7 +7,8 @@
   <img alt="GitHub Release" src="https://img.shields.io/github/v/release/BnanZ0/ok-duet-night-abyss">
   <a href="https://discord.gg/vVyCatEBgA"><img alt="Discord" src="https://img.shields.io/discord/296598043787132928?color=5865f2&label=%20Discord"></a>
 </div>
-### 一个基于图像识别的二重螺旋自动化程序，支持后台运行，基于 [ok-script](https://github.com/ok-oldking/ok-script)开发。
+
+### 一个基于图像识别的二重螺旋自动化程序，支持后台运行，基于[ok-script](https://github.com/ok-oldking/ok-script)开发。
 
 ## 免责声明
 
