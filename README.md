@@ -36,7 +36,7 @@ This software is open source, free of charge and for learning and exchange purpo
 
 ### 下载安装包运行
 * 从[https://github.com/BnanZ0/ok-duet-night-abyss/releases](https://github.com/BnanZ0/ok-duet-night-abyss/releases) 下载 ok-dna-win32-China-setup.exe
-* 可自动更新
+* 双击安装, 安装后可自动更新
 
 ### Python 源码运行
 
